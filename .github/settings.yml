@@ -1,3 +1,10 @@
 # Throwaway test base for shared-settings-and-renovate task 1.2. Replaced by the real base in task 2.1.
 repository:
   web_commit_signoff_required: true
+branches:
+- name: main
+  protection:
+    required_status_checks:
+      checks:
+      - context: DCO
+        app_id: 1861
