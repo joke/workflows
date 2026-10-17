@@ -1,0 +1,8 @@
+name: workflows
+description: Shared workflows, and the Terraform configuration for repository settings
+homepage: ''
+topics: []
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- Terraform Cloud/xckk/repo-id-hKFySZrkxzB3pzrW
