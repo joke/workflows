@@ -15,3 +15,14 @@ module "zim_mise" {
     { context = "DCO" },
   ]
 }
+
+# Classic branch protection on main, replaced by the ruleset above. It required one approval and
+# code owner review. Removing it here deletes the protection on the next apply; see design.md,
+# "Migrating a repository means removing its classic protection".
+removed {
+  from = github_branch_protection.zim_mise_classic
+
+  lifecycle {
+    destroy = true
+  }
+}
