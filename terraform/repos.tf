@@ -7,9 +7,11 @@ module "zim_mise" {
   description = "zim module for mise"
   topics      = ["zim", "zimfw", "module", "zsh", "mise"]
 
+  # integration_id is omitted: the ruleset API returned 422 "Invalid integration ids" for these
+  # checks on zim-mise, even though the app IDs (68672, 198092, 1861) are the reporting apps' IDs.
   required_checks = [
-    { context = "pre-commit.ci - pr", integration_id = 68672 },
-    { context = "Semantic PR", integration_id = 198092 },
-    { context = "DCO", integration_id = 1861 },
+    { context = "pre-commit.ci - pr" },
+    { context = "Semantic PR" },
+    { context = "DCO" },
   ]
 }
