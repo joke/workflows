@@ -1,0 +1,8 @@
+name: caffeinate
+description: A Java annotation processor that generates implementation classes from annotated interfaces
+homepage: https://joke.github.io/caffeinate/
+topics: [annotation-processor, code-generation, java]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

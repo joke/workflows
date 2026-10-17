@@ -1,0 +1,8 @@
+name: spock-outputcapture
+description: OutputCapture for the Spock Framework
+homepage: ''
+topics: [output-checking, spock-extension, spock-framework]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

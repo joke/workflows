@@ -1,0 +1,8 @@
+name: objects
+description: objects annotation processor
+homepage: ''
+topics: [annotation-processor, java]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

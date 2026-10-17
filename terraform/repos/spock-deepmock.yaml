@@ -1,0 +1,8 @@
+name: spock-deepmock
+description: Deep mocking for the Spock Framework
+homepage: ''
+topics: [mocking, spock-extension, spock-framework]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

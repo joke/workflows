@@ -1,0 +1,8 @@
+name: jspecify
+description: java annotation processor that generated jspeciy package-info.java files
+homepage: ''
+topics: []
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

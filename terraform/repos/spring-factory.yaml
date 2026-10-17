@@ -1,0 +1,8 @@
+name: spring-factory
+description: Annotation processor for spring factories META-INF/spring.factories
+homepage: ''
+topics: [annotation-processor, java, spring-boot]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

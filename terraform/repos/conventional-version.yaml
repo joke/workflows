@@ -1,0 +1,8 @@
+name: conventional-version
+description: A Gradle settings plugin that calculates project versions from conventional commits, predicting what release-please will publish
+homepage: https://plugins.gradle.org/plugin/io.github.joke.conventional-version
+topics: [conventional-commits, gradle, gradle-plugin, java, release-please, semver, snapshot, versioning]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build
