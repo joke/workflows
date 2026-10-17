@@ -86,6 +86,13 @@ Each repository gets a YAML file under `terraform/repos/`, and its `settings.yml
 - [x] 10.2 `.github/dependabot.yml` and `.github/autoapproval.yml` removed from every in-scope repository (PRs merged, `zim-krew` had no dependabot file).
 - [x] 10.3 Dependabot PRs closed (78) in the in-scope repositories.
 
+## 11. Versioned shared workflows
+
+- [x] 11.1 Tag `v1.0.0` on joke/workflows main (d19d946), the baseline for release-please.
+- [ ] 11.2 Merge joke/workflows#17: release-please for this repository (`release.yml`, `release-please-config.json`, `.release-please-manifest.json` at 1.0.0) and the rewritten README. Delete the untracked root copies of these files from the local checkout before pulling.
+- [ ] 11.3 Pin every caller (`build.yml` and `release.yml` in the Gradle libraries and zim modules, and `percolate`'s `release.yml`) from `@main` to `@v1.0.0`.
+- [ ] 11.4 Check that Renovate detects the pinned reusable workflow refs (`uses: joke/workflows/.github/workflows/...@v1.0.0`) and proposes the next tag. The preset's `pinDigests` rule for GitHub Actions may need an exception for reusable workflows.
+
 ## Workflow follow-up
 
 - Archive this change after the rollout is verified, with `/opsx:archive`.
