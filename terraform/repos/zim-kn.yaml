@@ -1,7 +1,7 @@
 name: zim-kn
 description: zim module for kn
 homepage: ''
-topics: [chezmoi, module, zim, zimfw, zsh]
+topics: [module, zim, zimfw, zsh]
 required_checks:
 - pre-commit.ci - pr
 - Semantic PR
