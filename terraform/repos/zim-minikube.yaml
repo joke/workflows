@@ -1,0 +1,8 @@
+name: zim-minikube
+description: zim module for minikube
+homepage: ''
+topics: [minikube, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

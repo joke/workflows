@@ -88,3 +88,12 @@ resource "github_repository_ruleset" "main" {
     }
   }
 }
+
+# Classic branch protection on main, replaced by the ruleset above. It is imported first, then
+# removed by setting legacy_protection to false.
+resource "github_branch_protection" "legacy" {
+  count = var.legacy_protection ? 1 : 0
+
+  repository_id = github_repository.this.node_id
+  pattern       = "main"
+}

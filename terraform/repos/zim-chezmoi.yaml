@@ -1,0 +1,8 @@
+name: zim-chezmoi
+description: zim module for chezmoi
+homepage: ''
+topics: [chezmoi, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

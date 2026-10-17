@@ -1,0 +1,8 @@
+name: zim-yq
+description: zim module for yq
+homepage: ''
+topics: [module, yq, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

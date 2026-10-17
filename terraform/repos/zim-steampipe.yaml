@@ -1,0 +1,8 @@
+name: zim-steampipe
+description: zim module for steampipe
+homepage: ''
+topics: [module, steampipe, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

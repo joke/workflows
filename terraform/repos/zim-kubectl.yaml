@@ -1,0 +1,8 @@
+name: zim-kubectl
+description: zim module for kubectl
+homepage: ''
+topics: [kubectl, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

@@ -1,0 +1,8 @@
+name: zim-starship
+description: zim module for the starship prompt
+homepage: ''
+topics: [module, starship-prompt, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

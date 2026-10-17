@@ -9,15 +9,24 @@ locals {
   }
 }
 
+# Repositories whose classic branch protection is still in state. Set during the import of the
+# classic protection; empty once it has been removed.
+variable "legacy_protection_repos" {
+  type        = list(string)
+  description = "Repositories whose classic branch protection on main is still managed. Empty removes it."
+  default     = []
+}
+
 module "repo" {
   source   = "./modules/repository"
   for_each = local.repos
 
-  name            = each.value.name
-  description     = each.value.description
-  homepage        = each.value.homepage
-  topics          = each.value.topics
-  required_checks = each.value.required_checks
+  name              = each.value.name
+  description       = each.value.description
+  homepage          = each.value.homepage
+  topics            = each.value.topics
+  required_checks   = each.value.required_checks
+  legacy_protection = contains(var.legacy_protection_repos, each.key)
 }
 
 # zim-mise was the first module block; this keeps its state without recreating it.
@@ -26,8 +35,7 @@ moved {
   to   = module.repo["zim-mise"]
 }
 
-# Classic branch protection on main, replaced by the ruleset. It required one approval and code
-# owner review. Removing it here deletes the protection on the next apply; see design.md,
+# Classic branch protection on main for zim-mise, replaced by the ruleset. Removed; see design.md,
 # "Migrating a repository means removing its classic protection".
 removed {
   from = github_branch_protection.zim_mise_classic
