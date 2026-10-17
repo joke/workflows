@@ -5,10 +5,11 @@
 # the module does not change an existing repository's unmanaged settings.
 
 resource "github_repository" "this" {
-  name        = var.name
-  description = var.description
-  topics      = var.topics
-  visibility  = "public"
+  name         = var.name
+  description  = var.description
+  homepage_url = var.homepage
+  topics       = var.topics
+  visibility   = "public"
 
   allow_squash_merge          = false
   allow_merge_commit          = false
@@ -71,14 +72,17 @@ resource "github_repository_ruleset" "main" {
       required_review_thread_resolution = true
     }
 
-    required_status_checks {
-      strict_required_status_checks_policy = true
+    dynamic "required_status_checks" {
+      for_each = length(var.required_checks) > 0 ? [1] : []
 
-      dynamic "required_check" {
-        for_each = var.required_checks
-        content {
-          context        = required_check.value.context
-          integration_id = required_check.value.integration_id
+      content {
+        strict_required_status_checks_policy = true
+
+        dynamic "required_check" {
+          for_each = var.required_checks
+          content {
+            context = required_check.value
+          }
         }
       }
     }
