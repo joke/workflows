@@ -1,0 +1,8 @@
+name: percolate
+description: A Java annotation processor that generates mapper classes for bean mapping
+homepage: https://joke.github.io/percolate/
+topics: [annotation-processor, bean, code-generation, java, mapper]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

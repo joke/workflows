@@ -1,0 +1,8 @@
+name: spock-mockable
+description: Mock the un-mockable
+homepage: ''
+topics: [mocking, spock-extension, spock-framework]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build

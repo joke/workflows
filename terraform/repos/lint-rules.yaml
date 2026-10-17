@@ -1,0 +1,8 @@
+name: lint-rules
+description: Custom PMD 7 and CodeNarc 4 rules, published as rulesets any project can put on its pmd or codenarc configuration
+homepage: ''
+topics: [code-quality, codenarc, codenarc-rules, groovy, java, pmd, pmd-rules, spock, static-analysis]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- build
