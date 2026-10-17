@@ -17,7 +17,7 @@ variable "topics" {
 variable "required_checks" {
   type = list(object({
     context        = string
-    integration_id = number
+    integration_id = optional(number)
   }))
-  description = "Status checks required before merging to main, each tied to the app that reports it."
+  description = "Status checks required before merging to main. integration_id ties a check to the app that reports it; it is omitted where the ruleset API rejects it."
 }
