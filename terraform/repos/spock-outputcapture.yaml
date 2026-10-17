@@ -5,4 +5,4 @@ topics: [output-checking, spock-extension, spock-framework]
 required_checks:
 - pre-commit.ci - pr
 - Semantic PR
-- build
+- build / build

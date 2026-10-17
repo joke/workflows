@@ -5,4 +5,4 @@ topics: [annotation-processor, java, spring-boot]
 required_checks:
 - pre-commit.ci - pr
 - Semantic PR
-- build
+- build / build

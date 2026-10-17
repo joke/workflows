@@ -5,4 +5,4 @@ topics: [code-quality, codenarc, codenarc-rules, groovy, java, pmd, pmd-rules, s
 required_checks:
 - pre-commit.ci - pr
 - Semantic PR
-- build
+- build / build

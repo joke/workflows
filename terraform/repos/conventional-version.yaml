@@ -5,4 +5,4 @@ topics: [conventional-commits, gradle, gradle-plugin, java, release-please, semv
 required_checks:
 - pre-commit.ci - pr
 - Semantic PR
-- build
+- build / build
