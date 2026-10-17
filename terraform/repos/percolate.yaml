@@ -5,4 +5,4 @@ topics: [annotation-processor, bean, code-generation, java, mapper]
 required_checks:
 - pre-commit.ci - pr
 - Semantic PR
-- build
+- build / build

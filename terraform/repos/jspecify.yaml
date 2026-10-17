@@ -5,4 +5,4 @@ topics: []
 required_checks:
 - pre-commit.ci - pr
 - Semantic PR
-- build
+- build / build
