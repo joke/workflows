@@ -60,6 +60,8 @@ Each repository's `build.yml` and `release.yml` only call these workflows, with 
 
 Release-please runs on the default `GITHUB_TOKEN`. Every repository allows GitHub Actions to create and approve pull requests, and its default workflow permissions are read and write. The `RELEASE_PLEASE` secret is not used and is deleted.
 
+**Versioned shared workflows.** This repository releases with release-please (`release.yml`, version `1.0.0`, tag `v1.0.0` on main at the time of this change). Every repository pins the shared workflows to a tag (`@v1.0.0`), not to `@main`, so a change to the shared workflows reaches a repository only when that repository's pin moves. Renovate proposes the new tags as pull requests in each repository, and a person merges them. Renovate's pins on the reusable workflows are not verified yet; task 11.4 checks them.
+
 **Dependabot security alerts stay on.** Vulnerability alerts and automated security fixes stay enabled through Terraform. Only version updates move to Renovate.
 
 **Rollout order.** Terraform is first applied to one zim module (`zim-mise`) and its settings are confirmed. Renovate is tested on `spock-deepmock` first, with its ignore rules ported into the preset. Then the Terraform entries and the preset are rolled out to the other repositories.
