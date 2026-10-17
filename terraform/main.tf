@@ -18,13 +18,6 @@ terraform {
   }
 }
 
-variable "github_token" {
-  type        = string
-  sensitive   = true
-  description = "GitHub token with administration rights on the managed repositories. Set as a sensitive variable in the HCP Terraform workspace."
-}
-
 provider "github" {
   owner = "joke"
-  token = var.github_token
 }
