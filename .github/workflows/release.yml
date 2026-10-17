@@ -1,0 +1,18 @@
+name: release
+
+# Release for this repository itself. Every release is tagged vX.Y.Z, and the repositories pin the
+# shared workflows to a tag, which Renovate then updates in each repository.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: GoogleCloudPlatform/release-please-action@v5.0
+      id: release
