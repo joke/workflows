@@ -3,18 +3,28 @@
   "automerge": false,
   "packageRules": [
     {
-      "matchManagers": ["github-actions"],
-      "pinDigests": true,
-      "groupName": "GitHub Actions"
+      "groupName": "GitHub Actions",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "pinDigests": true
     },
     {
-      "matchManagers": ["gradle"],
-      "groupName": "Gradle"
+      "groupName": "Gradle",
+      "matchManagers": [
+        "gradle"
+      ]
     },
     {
-      "matchPackageNames": ["org.codehaus.groovy:groovy-bom", "org.spockframework:spock-bom"],
-      "matchUpdateTypes": ["major", "minor"],
-      "enabled": false
+      "enabled": false,
+      "matchPackageNames": [
+        "org.codehaus.groovy:groovy-bom",
+        "org.spockframework:spock-bom"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ]
     }
   ]
 }
