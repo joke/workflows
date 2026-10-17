@@ -1,0 +1,8 @@
+name: zim-github-cli
+description: zim module for github-cli
+homepage: ''
+topics: [github-cli, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

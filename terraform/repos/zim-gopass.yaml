@@ -1,0 +1,8 @@
+name: zim-gopass
+description: zim module for gopass
+homepage: ''
+topics: [gopass, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

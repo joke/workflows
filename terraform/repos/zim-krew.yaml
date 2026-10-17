@@ -1,0 +1,8 @@
+name: zim-krew
+description: zim module for krew
+homepage: ''
+topics: [krew, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

@@ -1,0 +1,8 @@
+name: zim-skaffold
+description: zim module for skaffold
+homepage: ''
+topics: [module, skaffold, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

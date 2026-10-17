@@ -1,0 +1,8 @@
+name: zim-oh-my-posh
+description: zim module for the oh-my-posh prompt
+homepage: ''
+topics: [module, oh-my-posh, prompt, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

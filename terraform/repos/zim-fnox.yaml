@@ -1,0 +1,8 @@
+name: zim-fnox
+description: zim module for fnox
+homepage: ''
+topics: [fnox, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

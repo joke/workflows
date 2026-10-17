@@ -25,3 +25,9 @@ variable "required_checks" {
   description = "Status check names required before merging to main. Empty skips the required checks for the repository."
   default     = []
 }
+
+variable "legacy_protection" {
+  type        = bool
+  description = "Whether the classic branch protection on main is still managed. Set to false to remove it."
+  default     = false
+}

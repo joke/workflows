@@ -1,0 +1,8 @@
+name: zim-helm
+description: zim module for helm
+homepage: ''
+topics: [helm, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

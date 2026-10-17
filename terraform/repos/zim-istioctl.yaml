@@ -1,0 +1,8 @@
+name: zim-istioctl
+description: zim module for istioctl
+homepage: ''
+topics: [istioctl, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO

@@ -1,0 +1,8 @@
+name: zim-k9s
+description: zim module for k9s
+homepage: ''
+topics: [k9s, module, zim, zimfw, zsh]
+required_checks:
+- pre-commit.ci - pr
+- Semantic PR
+- DCO
