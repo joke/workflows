@@ -1,0 +1,22 @@
+name: zim-release
+
+# The release for every zim module. Each repository calls this workflow from its release.yml. The
+# release is cut by release-please with the simple release type; the commits are signed off with
+# the owner's identity, and the token lets release-please's pull requests trigger the checks.
+on:
+  workflow_call:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: GoogleCloudPlatform/release-please-action@v5.0
+      id: release
+      with:
+        release-type: simple
+        signoff: Joke de Buhr <joke@xckk.de>
+        token: ${{ secrets.RELEASE_PLEASE }}
