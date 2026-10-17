@@ -14,10 +14,14 @@ variable "topics" {
   default     = []
 }
 
+variable "homepage" {
+  type        = string
+  description = "Repository homepage URL. Empty when there is none."
+  default     = ""
+}
+
 variable "required_checks" {
-  type = list(object({
-    context        = string
-    integration_id = optional(number)
-  }))
-  description = "Status checks required before merging to main. integration_id ties a check to the app that reports it; it is omitted where the ruleset API rejects it."
+  type        = list(string)
+  description = "Status check names required before merging to main. Empty skips the required checks for the repository."
+  default     = []
 }

@@ -1,0 +1,8 @@
+name: zim-mise
+description: zim module for mise
+homepage: ""
+topics: [zim, zimfw, module, zsh, mise]
+required_checks:
+  - pre-commit.ci - pr
+  - Semantic PR
+  - DCO

@@ -1,23 +1,33 @@
-# One module block per repository. Each sets only what is specific to it.
+# One YAML file per repository in repos/. The shared defaults live in modules/repository; each file
+# sets the metadata and the required checks for that repository. An empty required_checks list
+# skips the required status checks for that repository.
 
-module "zim_mise" {
-  source = "./modules/repository"
-
-  name        = "zim-mise"
-  description = "zim module for mise"
-  topics      = ["zim", "zimfw", "module", "zsh", "mise"]
-
-  # integration_id is omitted: the ruleset API returned 422 "Invalid integration ids" for these
-  # checks on zim-mise, even though the app IDs (68672, 198092, 1861) are the reporting apps' IDs.
-  required_checks = [
-    { context = "pre-commit.ci - pr" },
-    { context = "Semantic PR" },
-    { context = "DCO" },
-  ]
+locals {
+  repos = {
+    for file in fileset(path.module, "repos/*.yaml") :
+    trimsuffix(basename(file), ".yaml") => yamldecode(file("${path.module}/${file}"))
+  }
 }
 
-# Classic branch protection on main, replaced by the ruleset above. It required one approval and
-# code owner review. Removing it here deletes the protection on the next apply; see design.md,
+module "repo" {
+  source   = "./modules/repository"
+  for_each = local.repos
+
+  name            = each.value.name
+  description     = each.value.description
+  homepage        = each.value.homepage
+  topics          = each.value.topics
+  required_checks = each.value.required_checks
+}
+
+# zim-mise was the first module block; this keeps its state without recreating it.
+moved {
+  from = module.zim_mise
+  to   = module.repo["zim-mise"]
+}
+
+# Classic branch protection on main, replaced by the ruleset. It required one approval and code
+# owner review. Removing it here deletes the protection on the next apply; see design.md,
 # "Migrating a repository means removing its classic protection".
 removed {
   from = github_branch_protection.zim_mise_classic
