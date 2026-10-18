@@ -13,6 +13,16 @@
       "pinDigests": true
     },
     {
+      "description": "Keep reusable workflows on version tags, not commit digests",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "joke/workflows"
+      ],
+      "pinDigests": false
+    },
+    {
       "groupName": "Gradle",
       "matchManagers": [
         "gradle"
