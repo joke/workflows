@@ -36,7 +36,7 @@ jobs:
     # Manifest mode: the action reads release-please-config.json and .release-please-manifest.json
     # itself. Those same two files are what the build reads to compute the version, so the release
     # policy is stated once and neither side can drift from the other.
-    - uses: GoogleCloudPlatform/release-please-action@v5.0
+    - uses: GoogleCloudPlatform/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0
       id: release
 
   # Publishes to Maven Central only when release-please actually cut a release (releases_created) -
@@ -50,19 +50,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # On a push, the pushed commit is the one release-please tagged.
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         ref: ${{ inputs.tag || github.sha }}
         # The version is computed from the commits since the released version; the plugin fails the
         # build on a shallow clone rather than guessing.
         fetch-depth: 0
     - uses: jdx/mise-action@9b200bcecbfd6303e69a4a261b2e09e3757440a7 # v5
-    - uses: crazy-max/ghaction-import-gpg@v7
+    - uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7
       with:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
         passphrase: ${{ secrets.GPG_PASSPHRASE }}
         fingerprint: ${{ secrets.GPG_FINGERPRINT }}
-    - uses: gradle/actions/setup-gradle@v6
+    - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6
     - run: ./gradlew publishAggregationToCentralPortal
       env:
         ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
@@ -83,16 +83,16 @@ jobs:
       && needs.release-please.outputs.releases_created != 'true' }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         fetch-depth: 0
     - uses: jdx/mise-action@9b200bcecbfd6303e69a4a261b2e09e3757440a7 # v5
-    - uses: crazy-max/ghaction-import-gpg@v7
+    - uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7
       with:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
         passphrase: ${{ secrets.GPG_PASSPHRASE }}
         fingerprint: ${{ secrets.GPG_FINGERPRINT }}
-    - uses: gradle/actions/setup-gradle@v6
+    - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6
     - run: ./gradlew publishAggregationToCentralSnapshots
       env:
         ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
