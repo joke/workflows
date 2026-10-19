@@ -44,7 +44,7 @@ The asdf plugin repositories (`asdf-kn`, `asdf-chezmoi`, `asdf-crossplane-cli`, 
 **No required approvals, and auto-approval is removed.** The shared defaults set required approving reviews to 0, with code owner review off. With no approval required, the auto-approval workflows have no job left to do, so they are removed from every repository that has one: `autoapproval.yml` in the 17 `zim/zim-*` modules, `zim-fnox`, `zim-mise` (top level), `spock-mockable`, `spock-outputcapture` and `asdf-age-plugin-yubikey`. Removal happens only after Terraform has applied the 0 setting to that repository.
 
 **Renovate preset lives in this repository at `renovate/default.json`.** Each repository has a `renovate.json` containing `"extends": ["github>joke/workflows//renovate/default"]` and nothing else. The preset was first created in a separate `joke/renovate-config` repository and moved here so there is one place for the policy. The preset sets:
-- pinning of GitHub Action digests,
+- digest pinning off for GitHub Actions and reusable workflows, so both stay on version tags,
 - grouping of GitHub Actions and Gradle updates,
 - the Gradle ignore rules currently in `spock-deepmock`'s `dependabot.yml` (`groovy-bom` and `spock-bom` major and minor updates),
 - automerge disabled for every update type.
@@ -60,7 +60,7 @@ Each repository's `build.yml` and `release.yml` only call these workflows, with 
 
 Release-please runs on the default `GITHUB_TOKEN`. Every repository allows GitHub Actions to create and approve pull requests, and its default workflow permissions are read and write. The `RELEASE_PLEASE` secret is not used and is deleted.
 
-**Versioned shared workflows.** This repository releases with release-please (`release.yml`, version `1.0.0`, tag `v1.0.0` on main at the time of this change). Every repository pins the shared workflows to a tag (`@v1.0.0`), not to `@main`, so a change to the shared workflows reaches a repository only when that repository's pin moves. Renovate proposes the new tags as pull requests in each repository, and a person merges them. Renovate's pins on the reusable workflows are not verified yet; task 11.4 checks them.
+**Versioned shared workflows.** This repository releases with release-please (`release.yml`, version `1.0.0`, tag `v1.0.0` on main at the time of this change). Every repository pins the shared workflows to a tag (`@v1.0.0`), not to `@main`, so a change to the shared workflows reaches a repository only when that repository's pin moves. Renovate proposes the new tags as pull requests in each repository, and a person merges them. The preset turns digest pinning off for the `github-actions` manager, so reusable workflow refs stay on tags. Task 11.4 checks that Renovate proposes the next tag rather than a digest.
 
 **Dependabot security alerts stay on.** Vulnerability alerts and automated security fixes stay enabled through Terraform. Only version updates move to Renovate.
 

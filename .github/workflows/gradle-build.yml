@@ -24,7 +24,7 @@ jobs:
         # `check` configures the publications and therefore resolves the version, which needs the
         # full history.
         fetch-depth: 0
-    - uses: jdx/mise-action@9b200bcecbfd6303e69a4a261b2e09e3757440a7 # v5
+    - uses: jdx/mise-action@v5
     - uses: gradle/actions/setup-gradle@v6
     - run: ./gradlew check
     - name: Test Report
