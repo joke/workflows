@@ -37,7 +37,7 @@ Dependabot has no way to inherit configuration from another repository. Renovate
 **The shared defaults are the settings that are the same everywhere.** Merge methods, `delete_branch_on_merge`, `allow_auto_merge`, `allow_update_branch`, vulnerability alerts, automated security fixes, linear history, conversation resolution and `strict` status checks. Required checks are not in the shared defaults. They come from each repository's group, and each group uses one list:
 - **zim modules:** `pre-commit.ci - pr`, `Semantic PR`, `DCO`.
 - **Gradle libraries:** `pre-commit.ci - pr`, `Semantic PR` and `build`. DCO is dropped from this group, because it is not reported on several of these repositories. The CodeQL and codecov checks, and their workflows, are removed.
-- **Metadata-only repositories** (`ktouch-noted`, `zmk-config`, `claude-plugins`, `dotfiles`, `vpn2`, `vpn`): the shared merge and branch settings, with no required checks, because these repositories have no pipeline to report them.
+- **Metadata-only repositories** (`ktouch-noted`, `zmk-config`, `claude-plugins`, `dotfiles`): the shared merge and branch settings, with no required checks, because these repositories have no pipeline to report them.
 
 The asdf plugin repositories (`asdf-kn`, `asdf-chezmoi`, `asdf-crossplane-cli`, `asdf-plugins`, `zim-asdf`) are archived and not managed. `zsh` was already archived. `template` was deleted.
 
