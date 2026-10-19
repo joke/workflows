@@ -6,7 +6,7 @@ Each repository keeps its own copy of repository settings, Dependabot configurat
 
 ## What Changes
 
-- Repository settings, branch protection and Dependabot security settings for every repository are managed by Terraform in this repository (`joke/workflows`), using the GitHub provider. HCP Terraform runs the plan on pull requests and the apply on merge.
+- Repository settings, branch protection and Dependabot security settings for every repository are managed by Terraform in this repository (`joke/workflows`), using the GitHub provider. HCP Terraform runs the plan on pull requests and applies the change automatically on merge to `main`; nobody runs apply by hand.
 - Each repository's metadata (name, description, homepage, topics) and its required status checks are one YAML file under `terraform/repos/`. Repositories in the same group share one check list:
   - **zim modules:** `pre-commit.ci - pr`, `Semantic PR`, `DCO`.
   - **Gradle libraries:** `pre-commit.ci - pr`, `Semantic PR` and `build`. DCO is not used, because its app does not report on these repositories. CodeQL and codecov checks and their workflows are removed.

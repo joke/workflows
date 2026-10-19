@@ -26,7 +26,7 @@ Dependabot has no way to inherit configuration from another repository. Renovate
 
 **Settings are managed by Terraform in `joke/workflows`, not by Probot.** The configuration lives in `terraform/` in `joke/workflows`. It uses the official `integrations/github` provider. The shared defaults live in one module (`terraform/modules/repository`). `terraform/repos.tf` reads each `terraform/repos/<name>.yaml` with `for_each` and passes its metadata and required checks to the module. A repository with an empty required-check list gets no required checks. Probot's `settings.yml` is removed from each repository during its cutover, because Probot and Terraform would otherwise both try to set the same values.
 
-**HCP Terraform on the free tier runs the plan and apply.** The HCP Terraform workspace is connected to `joke/workflows` with working directory `terraform/`. It plans on pull requests and applies on merge to `main`. The free tier allows up to 500 managed resources and one concurrent run. The estimated count is about three resources per repository, so it fits for the current set of repositories. If the cap is exceeded, state moves to an S3 bucket provided by the owner, and that is a separate change.
+**HCP Terraform on the free tier runs the plan and apply.** The HCP Terraform workspace is connected to `joke/workflows` with working directory `terraform/`. It plans on pull requests and applies on merge to `main`. Terraform changes are applied automatically by HCP Terraform when a pull request that changes `terraform/` merges to `main`; nobody runs `terraform apply` by hand. Wherever this change says "apply" a Terraform entry, it means merging that entry's pull request and letting HCP Terraform apply it. The free tier allows up to 500 managed resources and one concurrent run. The estimated count is about three resources per repository, so it fits for the current set of repositories. If the cap is exceeded, state moves to an S3 bucket provided by the owner, and that is a separate change.
 
 **The GitHub token is a sensitive workspace variable.** Terraform needs a token that can administer every managed repository. The token is stored as a sensitive variable in the HCP Terraform workspace, never in the repository. A GitHub App would avoid a personal token, but it needs installing and is left for a later change.
 
@@ -95,7 +95,7 @@ The probe results below decided the change away from `_extends`:
 
 1. Verify the HCP Terraform free tier: the managed-resource count, VCS-driven plans on pull requests, and the provider resources the design uses.
 2. Write `terraform/` in `joke/workflows` with the shared module and the `zim-mise` entry. Import the existing `zim-mise` resources and confirm the plan shows only the intended changes.
-3. Remove `zim-mise`'s `settings.yml`, apply the Terraform entry, and confirm its settings and approvals match.
+3. Remove `zim-mise`'s `settings.yml`, merge the Terraform entry's pull request (HCP Terraform applies it), and confirm its settings and approvals match.
 4. Create `joke/renovate-config` with `default.json`, and validate it.
 5. Enable Renovate on `spock-deepmock`, port its ignore rules, review the first pull requests, then remove its `dependabot.yml`.
 6. Roll out the Terraform entries and the Renovate preset to the remaining repositories, one repository type at a time.
