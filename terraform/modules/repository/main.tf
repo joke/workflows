@@ -54,13 +54,8 @@ resource "github_repository_ruleset" "main" {
     }
   }
 
-  # Repository admins can bypass the ruleset, matching enforce_admins: false on the old protection.
-  bypass_actors {
-    actor_id    = 5
-    actor_type  = "RepositoryRole"
-    bypass_mode = "always"
-  }
-
+  # No bypass actors: nobody, including repository admins, can push to main. Changes reach main
+  # through a pull request that passes the required checks.
   rules {
     required_linear_history = true
 
