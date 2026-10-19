@@ -36,6 +36,14 @@ resource "github_repository_vulnerability_alerts" "this" {
   enabled    = true
 }
 
+# Release-please opens its release PRs with the default GITHUB_TOKEN, which needs write access and
+# permission to create pull requests. See design.md, "Release-please runs on the default GITHUB_TOKEN".
+resource "github_workflow_repository_permissions" "this" {
+  repository                       = github_repository.this.name
+  default_workflow_permissions     = "write"
+  can_approve_pull_request_reviews = true
+}
+
 resource "github_repository_dependabot_security_updates" "this" {
   repository = github_repository.this.name
   enabled    = true
