@@ -91,7 +91,8 @@ Each repository gets a YAML file under `terraform/repos/`, and its `settings.yml
 - [x] 11.1 Tag `v1.0.0` on joke/workflows main (d19d946), the baseline for release-please.
 - [x] 11.2 Merge joke/workflows#17: release-please for this repository is merged. The release job ran on main and opened no release PR, as expected, since no feat or fix commit has landed since v1.0.0.: release-please for this repository (`release.yml`, `release-please-config.json`, `.release-please-manifest.json` at 1.0.0) and the rewritten README. Delete the untracked root copies of these files from the local checkout before pulling.
 - [x] 11.3 (25 of 26 merged; `conventional-version#25` is blocked by its PMD failure) Pin every caller (`build.yml` and `release.yml` in the Gradle libraries and zim modules, and `percolate`'s `release.yml`) from `@main` to `@v1.0.0`.
-- [ ] 11.4 Check that Renovate detects the pinned reusable workflow refs (`uses: joke/workflows/.github/workflows/...@v1.0.0`) and proposes the next tag. The preset's `pinDigests` rule for GitHub Actions may need an exception for reusable workflows.
+- [ ] 11.4 Check that Renovate detects the pinned reusable workflow refs (`uses: joke/workflows/.github/workflows/...@v1.0.0`) and proposes the next tag. The preset disables digest pinning for GitHub Actions, so no separate exception is planned; this run confirms it.
+- [x] 11.5 Replace the digest pins on `jdx/mise-action` in `gradle-build.yml` and `gradle-release.yml` with the `v5` tag. Renovate's digest pin was reverted in the preset but not in the workflows. Verified when the workflows reference `@v5` and no digest.
 
 ## Workflow follow-up
 
