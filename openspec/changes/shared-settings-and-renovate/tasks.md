@@ -24,13 +24,13 @@
 - [x] 2.3 Add the `zim-mise` entry (written in `terraform/repos.tf` on PR joke/workflows#2; pending the HCP plan on that PR) with its name, description, topics and required checks (`pre-commit.ci - pr`, `Semantic PR`, `DCO`). Verified when the plan shows no change to its name, description, topics or checks.
 - [x] 2.4 Import the existing `zim-mise` resources into the state. Verified when the plan shows only the intended changes: approvals from 1 to 0, and code owner review from on to off. Done: the classic protection was imported and removed by PR #5, and `zim-mise` now reports `Branch not protected`.
 - [x] 2.5 Connect the HCP Terraform workspace to `joke/workflows` with working directory `terraform/`, plan on pull requests, and apply on merge to `main`. HCP Terraform applies every Terraform change automatically on merge; nobody runs apply by hand. Verified when a test pull request shows a plan comment and merging it runs an apply.
-- [ ] 2.6 (in progress, PR joke/workflows#6) Apply branch protection to `joke/workflows` like every other repository. It was excluded while the repository was private, because the free plan returns HTTP 403 for protection on private repos; it has been public since this change. Verified when the plan for `joke/workflows` includes its protection resource and the apply succeeds.
+- [x] 2.6 (done: PR joke/workflows#6 merged 2026-10-17; `joke/workflows` has an active `main` ruleset with linear history, pull requests and required checks) Apply branch protection to `joke/workflows` like every other repository. It was excluded while the repository was private, because the free plan returns HTTP 403 for protection on private repos; it has been public since this change. Verified when the plan for `joke/workflows` includes its protection resource and the apply succeeds.
 
 ## 3. Renovate preset
 
 - [x] 3.1 Create the public repository `joke/renovate-config` with `default.json` containing the policy in design.md, including the Gradle ignore rules and automerge disabled. Verified when `renovate-config-validator` passes on the file. Done: `joke/renovate-config` is public; `default.json` validates. The ignore rules use the full coordinates `org.codehaus.groovy:groovy-bom` and `org.spockframework:spock-bom`.
 - [x] 3.1b Move the preset into this repository at `renovate/default.json` (PR joke/workflows#7), and delete `joke/renovate-config`. The repository is deleted. The preset path `github>joke/workflows//renovate/default` is not yet checked with `renovate-config-validator`; that check is pending.
-- [ ] 3.2 Install the Renovate GitHub App for the account with access to the repositories being migrated. Verified when the app is listed under the account's installed GitHub Apps.
+- [x] 3.2 Install the Renovate GitHub App for the account with access to the repositories being migrated. Verified when the app is listed under the account's installed GitHub Apps.
 
 ## 4. Pilot on zim-mise and spock-deepmock
 
@@ -44,8 +44,8 @@
 ## 5. Auto-approval and owner auto-merge removal
 
 - [x] 5.1 Remove `workflows/.github/workflows/automerge.yml` (uncommitted, created earlier in this change's parent work). Verified when the file is gone and `git status` no longer lists it.
-- [ ] 5.2 Remove `.github/workflows/autoapproval.yml` from `asdf-age-plugin-yubikey`, `spock-mockable`, `spock-outputcapture`, `zim-fnox` and `zim-mise` (top level). Verified when each file is gone and each repository's required approvals in its settings are 0 according to Terraform. Do this only after step 4.1 has applied to that repository.
-- [ ] 5.3 Remove `.github/workflows/autoapproval.yml` from the 17 `zim/zim-*` modules, one at a time, each after its Terraform entry has applied. Verified when each file is gone and each repository's required approvals in its settings are 0.
+- [x] 5.2 Remove `.github/workflows/autoapproval.yml` from `asdf-age-plugin-yubikey`, `spock-mockable`, `spock-outputcapture`, `zim-fnox` and `zim-mise` (top level). Verified when each file is gone and each repository's required approvals in its settings are 0 according to Terraform. Do this only after step 4.1 has applied to that repository. (done: the four active repositories are done. `asdf-age-plugin-yubikey` is archived and skipped, as archived repositories are out of scope; its `autoapproval.yml` is not removed.)
+- [x] 5.3 Remove `.github/workflows/autoapproval.yml` from the 17 `zim/zim-*` modules, one at a time, each after its Terraform entry has applied. (done: all 17 files are gone and every in-scope repository's pull-request ruleset requires 0 approvals) Verified when each file is gone and each repository's required approvals in its settings are 0.
 
 ## 6. Rollout
 
@@ -66,9 +66,9 @@ Each repository gets a YAML file under `terraform/repos/`, and its `settings.yml
 ## 8. Unified build workflow
 
 - [x] 8.1 (superseded by 8.6: the workflow is now shared, not copied) Copy `.github/workflows/build.yml` from `lint-rules` into each Gradle library (`spock-deepmock`, `spock-mockable`, `spock-outputcapture`, `spring-factory`, `objects`, `percolate`, `caffeinate`, `jspecify`, `conventional-version`). Remove the Codecov steps. The check name stays `build`.
-- [ ] 8.2 Add a `.mise.toml` with the Java version the build used before to `spock-mockable`, `spring-factory` and `objects`, which have none.
-- [ ] 8.3 Remove `codeql-analysis.yml` wherever it still exists.
-- [ ] 8.4 Check `build` on every Gradle library after the change. `conventional-version` (PR joke/conventional-version#21) fails PMD on `UnnecessaryWarningSuppression`; left as is until its Gradle build is reviewed separately. Check `spock-deepmock`'s example-test matrix, which the copied workflow doesn't run, and decide whether it needs its own job.
+- [ ] 8.2 (deferred by the owner; to be done later) Add a `.mise.toml` with the Java version the build used before to `spock-mockable`, `spring-factory` and `objects`, which have none.
+- [x] 8.3 Remove `codeql-analysis.yml` wherever it still exists. (done: no in-scope repository has the file)
+- [ ] 8.4 (deferred by the owner; to be done later) Check `build` on every Gradle library after the change. `conventional-version` (PR joke/conventional-version#21) fails PMD on `UnnecessaryWarningSuppression`; left as is until its Gradle build is reviewed separately. Check `spock-deepmock`'s example-test matrix, which the copied workflow doesn't run, and decide whether it needs its own job.
 - [x] 8.6 One shared workflow: `.github/workflows/gradle-build.yml` in joke/workflows (PR #12), with no inputs. Each Gradle library's `build.yml` only calls it (PRs spock-deepmock#256, spock-mockable#387, spock-outputcapture#228, spring-factory#154, objects#52, lint-rules#12, percolate#89, caffeinate#38, jspecify#18 merged; conventional-version#22 open and failing). The required check is `build / build` (joke/workflows#13).
 - [x] 8.5 Dependabot: close all open Dependabot PRs in the in-scope repositories (78 closed).
 
