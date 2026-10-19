@@ -23,7 +23,7 @@
 - [x] 2.2 Write the shared module (`terraform/modules/repository`) with the defaults from design.md. Branch protection is a repository ruleset, as decided in design.md, because `github_branch_protection_v3` can't set linear history. Validated with `terraform validate`; PR joke/workflows#2 (not merged). Defaults: merge methods, delete-branch-on-merge, auto-merge, update-branch, vulnerability alerts, automated security fixes, linear history, conversation resolution, `strict` status checks, and zero approvals with code owner review off. Verified when `terraform validate` passes and the module has no per-repository identity.
 - [x] 2.3 Add the `zim-mise` entry (written in `terraform/repos.tf` on PR joke/workflows#2; pending the HCP plan on that PR) with its name, description, topics and required checks (`pre-commit.ci - pr`, `Semantic PR`, `DCO`). Verified when the plan shows no change to its name, description, topics or checks.
 - [x] 2.4 Import the existing `zim-mise` resources into the state. Verified when the plan shows only the intended changes: approvals from 1 to 0, and code owner review from on to off. Done: the classic protection was imported and removed by PR #5, and `zim-mise` now reports `Branch not protected`.
-- [ ] 2.5 Connect the HCP Terraform workspace to `joke/workflows` with working directory `terraform/`, plan on pull requests, and apply on merge to `main`. Verified when a test pull request shows a plan comment and merging it runs an apply.
+- [x] 2.5 Connect the HCP Terraform workspace to `joke/workflows` with working directory `terraform/`, plan on pull requests, and apply on merge to `main`. HCP Terraform applies every Terraform change automatically on merge; nobody runs apply by hand. Verified when a test pull request shows a plan comment and merging it runs an apply.
 - [ ] 2.6 (in progress, PR joke/workflows#6) Apply branch protection to `joke/workflows` like every other repository. It was excluded while the repository was private, because the free plan returns HTTP 403 for protection on private repos; it has been public since this change. Verified when the plan for `joke/workflows` includes its protection resource and the apply succeeds.
 
 ## 3. Renovate preset
@@ -34,7 +34,7 @@
 
 ## 4. Pilot on zim-mise and spock-deepmock
 
-- [ ] 4.1 Remove `zim-mise`'s `.github/settings.yml` and apply its Terraform entry. Verified when Probot no longer syncs the repository, Terraform's plan is empty, and the repository's approvals read 0.
+- [ ] 4.1 Remove `zim-mise`'s `.github/settings.yml` and merge its Terraform entry's pull request, so HCP Terraform applies it automatically. Verified when Probot no longer syncs the repository, Terraform's plan is empty, and the repository's approvals read 0.
 - [~] 4.2 (renovate.json added in PR joke/spock-deepmock#248, merged; onboarding PR waits for the Renovate app, task 3.2) Add `renovate.json` to `spock-deepmock` containing only `"extends": ["github>joke/renovate-config"]`. Verified when Renovate's onboarding PR appears and validates.
 - [ ] 4.3 Add the `spock-deepmock` entry to Terraform and remove its `.github/settings.yml`. Verified when its plan keeps its own required checks and its settings match the shared defaults.
 - [ ] 4.4 Review the first Renovate pull requests in `spock-deepmock`, and confirm no update is auto-merged. Verified when each Renovate PR is open until a person merges it.
@@ -49,7 +49,7 @@
 
 ## 6. Rollout
 
-- [ ] 6.1 Add Terraform entries for the remaining zim modules, one at a time. For each: remove its `settings.yml`, apply, and confirm its required checks. Verified when every module's settings match the shared defaults and its `dependabot.yml` is removed.
+- [ ] 6.1 Add Terraform entries for the remaining zim modules, one at a time. For each: remove its `settings.yml`, merge its Terraform pull request (HCP Terraform applies it), and confirm its required checks. Verified when every module's settings match the shared defaults and its `dependabot.yml` is removed.
 - [ ] 6.2 Add Terraform entries and the Renovate preset to the remaining repositories, one repository type at a time. Verified when every repository is listed in Terraform and extends the preset in its `renovate.json`.
 - [ ] 6.3 (in progress, PR joke/workflows#6: `.github/settings.yml` removed, `joke/workflows` managed by `terraform/repos/workflows.yaml`) Remove `.github/settings.yml` from `joke/workflows`, which holds the throwaway probe and is not used by Terraform. Verified when the file is gone and the Terraform plan for `joke/workflows` is unchanged.
 
