@@ -1,7 +1,7 @@
-# Actions secrets for the Java repositories. The values are in secrets.enc.yaml, encrypted with SOPS
-# (see .sops.yaml). The age private key is the SOPS_AGE_KEY environment variable of the HCP Terraform
-# workspace, never a Terraform variable. Every Java repository gets the Maven Central set and the
-# Gradle Plugin Portal set.
+# Actions secrets for the Java and Gradle plugin repositories. The values are in secrets.enc.yaml,
+# encrypted with SOPS (see .sops.yaml). The age private key is the SOPS_AGE_KEY environment variable of
+# the HCP Terraform workspace, never a Terraform variable. Every repository gets the Maven Central set
+# and the Gradle Plugin Portal set, under the names the plugins read directly.
 
 data "sops_file" "secrets" {
   source_file = "${path.module}/secrets.enc.yaml"
@@ -10,6 +10,7 @@ data "sops_file" "secrets" {
 locals {
   java_repos = toset([
     "caffeinate",
+    "claude-plugins",
     "conventional-version",
     "jspecify",
     "lint-rules",
