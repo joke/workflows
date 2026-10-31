@@ -67,6 +67,17 @@ jobs:
       env:
         ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
         ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.mavenCentralPassword }}
+    # The Gradle Plugin Portal. Only projects that apply the plugin publishing plugin have the
+    # publishPlugins task; the others skip it. The portal has no snapshots, so this runs on releases
+    # only, and the credentials are the GRADLE_PUBLISH_* variables the plugin reads directly.
+    - name: Publish to the Gradle Plugin Portal
+      run: |
+        if ./gradlew help --task publishPlugins > /dev/null 2>&1; then
+          ./gradlew publishPlugins
+        fi
+      env:
+        GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
+        GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
 
   # The complement of `publish`: every push to main that did not cut a release publishes the next
   # planned version as a snapshot, so main is always consumable. A release commit publishes only the
