@@ -1,0 +1,4 @@
+# Encrypts terraform/secrets.enc.yaml for the age key that HCP Terraform decrypts with (SOPS_AGE_KEY).
+creation_rules:
+- path_regex: ^terraform/secrets\.enc\.ya?ml$
+  age: age1ferm2h45a3w0vdxnvpa8535qdn8cfm4kx493zuh4qycv44gf5phq4weufz
