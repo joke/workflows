@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/joke/workflows/compare/v1.1.0...v1.2.0) (2026-10-31)
+
+
+### Features
+
+* manage ktouch-noted and me-board in Terraform ([4dd4d0e](https://github.com/joke/workflows/commit/4dd4d0ecf1e8e0a8d23926061dabae86b34d748d))
+* publish to the Gradle Plugin Portal from the shared release workflow ([5c542a9](https://github.com/joke/workflows/commit/5c542a9c807f7a4c216fc75239c19687f07765a2))
+
 ## [1.1.0](https://github.com/joke/workflows/compare/v1.0.1...v1.1.0) (2026-10-31)
 
 
