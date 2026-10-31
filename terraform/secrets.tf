@@ -61,9 +61,9 @@ resource "github_actions_secret" "java" {
     if contains(local.provided_secret_names, secret.name)
   }
 
-  repository      = each.value.repo
-  secret_name     = each.value.name
-  plaintext_value = data.sops_file.secrets.data[each.value.name]
+  repository  = each.value.repo
+  secret_name = each.value.name
+  value       = data.sops_file.secrets.data[each.value.name]
 
   # The template ships with CHANGE_ME; applying it would overwrite the live secret with that text.
   lifecycle {
