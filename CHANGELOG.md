@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/joke/workflows/compare/v1.0.1...v1.1.0) (2026-10-31)
+
+
+### Features
+
+* read Java repository secrets from a SOPS-encrypted file ([b33e176](https://github.com/joke/workflows/commit/b33e17610786066032f5141f4f64216ba35b33a2))
+* set Gradle Plugin Portal secrets on claude-plugins ([108947a](https://github.com/joke/workflows/commit/108947a326507bf9ef42c621ffbc0c0696d9aca2))
+
+
+### Bug Fixes
+
+* use the value argument of github_actions_secret ([3f97cf7](https://github.com/joke/workflows/commit/3f97cf7020d97e6b9841d4a098a215382b833ba3))
+
 ## [1.0.1](https://github.com/joke/workflows/compare/v1.0.0...v1.0.1) (2026-10-19)
 
 
